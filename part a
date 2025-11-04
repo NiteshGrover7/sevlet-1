@@ -1,0 +1,37 @@
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+
+public class LoginServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Set response content type
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // Retrieve form parameters
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        // Hardcoded validation (you can later connect this to a DB)
+        String validUser = "nitesh";
+        String validPass = "12345";
+
+        // Validation logic
+        if (username.equals(validUser) && password.equals(validPass)) {
+            out.println("<html><body style='font-family:Arial; text-align:center;'>");
+            out.println("<h2>Welcome, " + username + "!</h2>");
+            out.println("<p>Login Successful ✅</p>");
+            out.println("</body></html>");
+        } else {
+            out.println("<html><body style='font-family:Arial; text-align:center;'>");
+            out.println("<h2>Invalid Credentials ❌</h2>");
+            out.println("<p>Please try again.</p>");
+            out.println("<a href='login.html'>Back to Login</a>");
+            out.println("</body></html>");
+        }
+        out.close();
+    }
+}
